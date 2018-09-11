@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相册效果</title>
+    <style>
+        div{
+            width: 540px;
+            height: 600px;
+            margin: 0 auto;
+            border: 1px solid black;
+        }
+        ul li{
+            float: left;
+            margin-left: 15px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        for循环遍历取到的a数组，通过this传递点击当前的href值
+    </p>
+    <div>
+        <p id="des">蒲公英</p>
+        <img id="big_img" src="images/pic/pic1.jpg" alt="" width="540" >
+        <ul id="small_img">
+            <li>
+                <a href="images/pic/pic1.jpg" title="111">
+                    <img src="images/pic/pic1.jpg" alt="" width="100">
+                </a>
+            </li>
+            <li>
+                <a href="images/pic/pic2.jpg" title="222">
+                    <img src="images/pic/pic2.jpg" alt="" width="100">
+                </a>
+            </li>
+            <li>
+                <a href="images/pic/pic3.jpg" title="333">
+                    <img src="images/pic/pic3.jpg" alt="" width="100">
+                </a>
+            </li>
+            <li>
+                <a href="images/pic/pic4.jpg" title="444">
+                    <img src="images/pic/pic4.jpg" alt="" width="100">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // 取值ul
+        var ul = document.getElementById('small_img');
+        //取值a
+        var aList = ul.getElementsByTagName('a');
+        var des = document.getElementById('des');
+        var big_img = document.getElementById('big_img');
+        //绑定事件
+        // 遍历
+        for(var i=0; i< aList.length;i++){
+            aList[i].onclick = function () {
+                big_img.src = this.href;
+                des.innerText = this.title;
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
