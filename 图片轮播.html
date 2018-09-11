@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播实现</title>
+    <style>
+        .imgBox{
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            border:  1px solid black;
+        }
+        .imgBox img{
+            width: 300px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        思想:<br/>
+        1.dom操作，获取到值，这里使用的是getElementById<br/>
+        2.自加自减运算 ++  --<br/>
+        3.修改属性值：setAttribute（“xx”，“xx”）<br/>
+        4.注意： 要处理边界运算，第一张与最后一张，这里使用if语句判断<br/>
+    </p>
+    <div class="imgBox">
+        <img id="pic" src="images/pic/pic1.jpg" alt="">
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+    <script>
+    //1. 先取值
+        var pic = document.getElementById('pic');
+        var prev = document.getElementById('prev');
+        var next = document.getElementById('next');
+        var minIndex = 1;
+        var maxIndex = 6;
+        var currentIndex = minIndex;
+    // 2. 绑定事件
+        prev.onclick = function () {
+            if (currentIndex === minIndex){
+                currentIndex = minIndex;
+            }else{
+                currentIndex --;
+            }
+            pic.setAttribute("src", "images/pic/pic"+ currentIndex + ".jpg");
+            console.log(currentIndex);
+        };
+        next.onclick = function () {
+            if(currentIndex === maxIndex){
+                currentIndex = minIndex;
+            }else{
+                currentIndex++;
+            }
+            pic.setAttribute("src", "images/pic/pic"+ currentIndex + ".jpg");
+            console.log(currentIndex);
+        };
+    </script>
+</body>
+</html>
