@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+        }
+        #tab{
+            overflow: hidden;
+            width: 500px;
+            height: 120px;
+            margin: 100px auto;
+            border: 1px solid black;
+        }
+        #tab_head{
+            background-color: #cacaca;
+            height: 30px;
+        }
+        #tab_head  li{
+            float: left;
+            width: 98px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .selected{
+            background-color: #ffffff;
+            border-bottom: none;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding: 0;
+        }
+        #tab_head ul li:nth-child(1){
+            border-left: none;
+        }
+        #tab_head ul li:nth-last-child{
+            border-right: none;
+        }
+        #tab_head ul li:hover{
+            font-weight: bold;
+            color: orangered;
+            cursor: pointer;
+        }
+        #cont{
+
+        }
+        #cont .item{
+            padding-top: 20px;
+        }
+        #cont .item ul li{
+            float: left;
+            width: 220px;
+            text-align: center;
+            margin: 5px;
+        }
+        #cont .item ul li a:hover{
+            color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <!--header-->
+        <div id="tab_head">
+            <ul>
+                <li class="selected">美食</li>
+                <li>数码</li>
+                <li>男装</li>
+                <li>女装</li>
+                <li>家装</li>
+            </ul>
+        </div>
+        <!--内容区块-->
+        <div id="cont">
+            <div class="item" style="display: block">
+                <ul>
+                    <li><a href="">11111</a></li>
+                    <li><a href="">22222</a></li>
+                    <li><a href="">33333</a></li>
+                    <li><a href="">44444</a></li>
+                </ul>
+            </div>
+            <div class="item" style="display: none">
+                <ul>
+                    <li><a href="">11111</a></li>
+                    <li><a href="">22222</a></li>
+                    <li><a href="">33333</a></li>
+                    <li><a href="">44444</a></li>
+                </ul>
+            </div>
+            <div class="item" style="display: none">
+                <ul>
+                    <li><a href="">11111</a></li>
+                    <li><a href="">22222</a></li>
+                    <li><a href="">33333</a></li>
+                    <li><a href="">44444</a></li>
+                </ul>
+            </div>
+            <div class="item" style="display: none">
+                <ul>
+                    <li><a href="">11111</a></li>
+                    <li><a href="">22222</a></li>
+                    <li><a href="">33333</a></li>
+                    <li><a href="">44444</a></li>
+                </ul>
+            </div>
+            <div class="item" style="display: none">
+                <ul>
+                    <li><a href="">11111</a></li>
+                    <li><a href="">22222</a></li>
+                    <li><a href="">33333</a></li>
+                    <li><a href="">44444</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        //获取到head部分
+        var head = document.getElementById('tab_head');
+        var allLis = head.getElementsByTagName('li');
+        //获取到cont区块下所有的item
+        var cont = document.getElementById('cont');
+        var allItem = cont.getElementsByClassName('item');
+        //遍历监听事件
+        for( var i=0; i<=allLis.length; i++){
+            //取得头部所有的li
+            var ali = allLis[i];
+            // li.i = index;
+            ali.onmouseover = function () {
+                for(var j=0; j<=allLis.length; j++){
+                    allLis[j].className = null;
+                    allItem[j].style.display = 'none';
+                }
+                this.className = 'selected';
+                allItem[this.i].style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
