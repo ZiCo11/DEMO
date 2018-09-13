@@ -128,19 +128,21 @@
         var allLis = head.getElementsByTagName('li');
         //获取到cont区块下所有的item
         var cont = document.getElementById('cont');
-        var allItem = cont.getElementsByClassName('item');
+        var allItem = cont.getElementsByTagName('div');
         //遍历监听事件
-        for( var i=0; i<=allLis.length; i++){
+        for ( var i=0; i<allLis.length; i++){
             //取得头部所有的li
-            var ali = allLis[i];
-            // li.i = index;
-            ali.onmouseover = function () {
-                for(var j=0; j<=allLis.length; j++){
+            allLis[i].index = i;
+
+            allLis[i].onmouseover=function(){
+                //遍历清除所有的li的样式
+                for(var j=0; j<allLis.length; j++){
                     allLis[j].className = null;
                     allItem[j].style.display = 'none';
                 }
+                //指定当前鼠标指向的classname
                 this.className = 'selected';
-                allItem[this.i].style.display = 'block';
+                allItem[this.index].style.display = 'block';
             }
         }
     </script>
