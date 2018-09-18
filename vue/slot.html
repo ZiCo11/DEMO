@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>slot</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--slot-->
+        <!--<child>-->
+            <!--<p>hello</p>-->
+        <!--</child>-->
+
+        <!--具名插槽-->
+        <!--<body-content>-->
+            <!--<div id="header" slot="header">header</div>-->
+            <!--<div id="footer" slot="footer">footer</div>-->
+        <!--</body-content>-->
+
+        <!--作用域插槽-->
+        <child>
+            <!--首先父组件调用子组件的时候给子组件传了一个插槽，这个插槽是作用域插槽-->
+            <!--slot-scope是声明要接收的数据放在哪 这里是props-->
+            <!--固定写法 加template-->
+            <template slot-scope="props">
+                <!--这里是如何展示数据-->
+                <li>{{props.item}}</li>
+            </template>
+        </child>
+    </div>
+    <script>
+        //注册组件
+        // Vue.component('child',{
+        //     template: '<div>' +
+        //                     '<p>hello word</p>' +
+        //                     '<slot>默认内容</slot>' +
+        //                '</div>'
+        // });
+
+        // 具名插槽 根据不同的名字进行插槽
+        // Vue.component('body-content',{
+        //     template: '<div>' +
+        //                 '<slot name="header">默认header</slot>' +
+        //                 '<div class="content">content</div>' +
+        //                 '<slot name="footer">默认footer</slot>' +
+        //                '</div>'
+        // });
+
+        // 作用域插槽
+        Vue.component('child',{
+            data:function () {
+              return {
+                  list: [1, 2, 3, 4]
+              }
+            },
+            template: "<div>" +
+                            "<ul>" +
+                            "<slot v-for='item in list' :item=item></slot>" +
+                            "</ul>" +
+                       "</div>"
+        });
+        //实例化
+        var vm = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+</html>

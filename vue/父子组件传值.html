@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--子组件传值给父组件，父组件监听emit传递的改变事件 用on-->
+        <counter :count="0" @change="handleChange"></counter>
+        <counter :count="0" @change="handleChange"></counter>
+        <div>total: {{total}}</div>
+    </div>
+<script>
+    // 局部组件注册
+    var counter = {
+        props: ['count'],
+        // 父传子，其prop的属性值不能修改，只能通过建立副本的形式去修改 这里number就是副本
+        data: function () {
+          return {
+              number: this.count
+          }
+        },
+        template: "<div @click='handleClick'>{{number}}</div>",
+        methods: {
+            handleClick: function () {
+                this.number++;
+                //子传给父，通过$emit事件传值，括号后面是事件名称，跟一个参数，就是改变的值
+                this.$emit('change', 1)
+            }
+        }
+    };
+    var vm = new Vue({
+        el:'#app',
+        data:{
+          total: 0
+        },
+        components: {
+            counter: counter
+        },
+        methods: {
+            //这里的参数step是change改变的值 1
+            handleChange: function (step) {
+               this.total += step;
+            }
+        }
+    });
+</script>
+</body>
+</html>

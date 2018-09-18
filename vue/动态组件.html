@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态组件</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--动态组件-->
+        <component :is="currentTab"></component>
+        <!--<child-one v-if="currentTab === 'child-one'"></child-one>-->
+        <!--<child-two v-if="currentTab === 'child-two'"></child-two>-->
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script>
+        Vue.component('child-one',{
+            // v-once 只渲染元素和组件一次
+            // 随后的重新渲染元素/组件及其所有的子节点将被视为静态内容并跳过。这可以用于优化更新性能。
+            template:'<div v-once>child-one</div>'
+        });
+
+        Vue.component('child-two',{
+            template:'<div v-once>child-two</div>'
+        });
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                currentTab: 'child-one'
+            },
+            methods: {
+                handleBtnClick: function () {
+                    this.currentTab = (this.currentTab === 'child-one' ? 'child-two' : 'child-one');
+                }
+            }
+        })
+    </script>
+</body>
+</html>
